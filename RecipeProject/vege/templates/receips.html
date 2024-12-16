@@ -1,0 +1,77 @@
+ {% extends "layout.html" %}
+
+{% block title %}
+Chai aut Tweet
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+<form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<h2 class="text-center">Add Receipe</h2>
+<hr>
+  <div class="mb-3">
+    <label class="form-label">Receipe Name</label>
+    <input  type="text" class="form-control" name="receipe_name" required >
+   
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Receipe Description</label>
+    <input type="textarea" class="form-control" name="receipe_description" required>
+  </div>
+  <div class="mb-3 ">
+  <label class="form-label"> Upload Receipe Image</label>
+    <input type="file" class="form-control" name="receipe_image">
+    
+  </div>
+  <button type="submit" class="btn btn-success">Add Receipe</button>
+</form>
+</div>
+
+<div class="container mt-5">
+
+  <div class="mt-5">
+    <div class="mx-auto col-6">
+    <form>
+    
+      <div class="mb-3">
+        <label class="form-label"> Search Food</label>
+        <input  type="text" class="form-control" name="search" >
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  
+  </form>
+  </div>
+
+
+<table class="table col-6 mx-auto  p-3 shadow-lg">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Receipe Name</th>
+      <th scope="col">Receipe Description</th>
+      <th scope="col">Receipe Image</th>
+      <th scope="col">Actions</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  
+    {% for receipe in receipes %}
+     <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{receipe.receipe_name}}</td>
+      <td>{{receipe.receipe_description}}</td>
+      <td><img src="/media/{{receipe.receipe_image}}" style="height:100px "/></td>
+      <td><a href="/update-receipe/{{receipe.id}}" class="btn btn-success m-2">Edit</a>
+      <a href="/delete-receipe/{{receipe.id}}" class="btn btn-danger">Delete</a></td>
+      
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+{% endblock %}
