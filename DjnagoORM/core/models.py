@@ -1,10 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.exceptions import ValidationError
 # Restaurant
 # User
 # Rating
 
+def validate_restaurant_names_begins_with_a(value):
+    if not value.startswith('a'):
+        raise ValidationError("Restaurant Name Must begin with 'a'")
 
 class Restaurant(models.Model):
     class TypeChoices(models.TextChoices):
@@ -18,7 +22,7 @@ class Restaurant(models.Model):
 
 
 
-    name= models.CharField(max_length=100)
+    name= models.CharField(max_length=100,validators=[validate_restaurant_names_begins_with_a])
     website= models.URLField(default='')
     data_opened = models.DateField()
     latitude = models.FloatField(validators=[MinValueValidator(-90),MaxValueValidator(90)])
