@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.core.validators import MinValueValidator, MaxValueValidator
 # Restaurant
 # User
 # Rating
@@ -21,8 +21,8 @@ class Restaurant(models.Model):
     name= models.CharField(max_length=100)
     website= models.URLField(default='')
     data_opened = models.DateField()
-    latitude = models.FloatField()
-    longitude= models.FloatField()
+    latitude = models.FloatField(validators=[MinValueValidator(-90),MaxValueValidator(90)])
+    longitude= models.FloatField(validators=[MinValueValidator(-180),MaxValueValidator(180)])
     restaurant_type = models.CharField(max_length=2, choices =TypeChoices.choices)
 
     def __str__(self):
@@ -32,7 +32,9 @@ class Restaurant(models.Model):
 class Rating(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     restaurant = models.ForeignKey(Restaurant,on_delete=models.CASCADE, related_name="ratings")
-    rating = models.PositiveSmallIntegerField()
+    rating = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(5)]
+    )
 
 
     def __str__(self):

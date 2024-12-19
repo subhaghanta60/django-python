@@ -66,7 +66,7 @@ from pprint import pprint
     # print(restaurant.ratings.all())
     # pprint(connection.queries)
 
-def run():
+
     # Sale.objects.create(
     #     restaurant = Restaurant.objects.last(),
     #     income=9.33,
@@ -85,20 +85,27 @@ def run():
     #  restaurant=Restaurant.objects.first()
     #  print(restaurant.sales.all())
 
-    user =User.objects.first()
-    restaurant = Restaurant.objects.first()
+    # user =User.objects.first()
+    # restaurant = Restaurant.objects.first()
 
-    rating,created = Rating.objects.get_or_create(
-        restaurant=restaurant,
-        user=user,
-        rating=7
-    )
+    # rating,created = Rating.objects.get_or_create(
+    #     restaurant=restaurant,
+    #     user=user,
+    #     rating=7
+    # )
 
-    if created:
-        print("Welcome To Our Team")
+    # if created:
+    #     print("Welcome To Our Team")
 
-    pprint(connection.queries)
+    # pprint(connection.queries)
 
+def run():
+    user=User.objects.first()
+    restaurant= Restaurant.objects.first()
 
+    rating = Rating(user=user,restaurant=restaurant,rating=10)
+
+    rating.full_clean()
+    rating.save()
     
    
