@@ -99,13 +99,60 @@ from pprint import pprint
 
     # pprint(connection.queries)
 
-def run():
-    user=User.objects.first()
-    restaurant= Restaurant.objects.first()
+# def run():
+#     user=User.objects.first()
+#     restaurant= Restaurant.objects.first()
 
-    rating = Rating(user=user,restaurant=restaurant,rating=10)
+#     rating = Rating(user=user,restaurant=restaurant,rating=10)
 
-    rating.full_clean()
-    rating.save()
+#     rating.full_clean()
+#     rating.save()
     
-   
+
+# def run():
+#     restaurant=Restaurant.objects.first()
+
+#     print(restaurant.name)
+
+#     restaurant.name = " Father  Reasurent Name"
+#     # restaurant.save()  //In backend ,Updated All Resturant Column
+
+#     restaurant.save(update_fields=['name'])
+#     print(connection.queries)
+    
+
+
+# def run():
+
+#     restaurant=Restaurant()
+#     restaurant.name="My Indian Reasurent"
+#     restaurant.data_opened=timezone.now()
+#     restaurant.restaurant_type = Restaurant.TypeChoices.INDIAN
+#     restaurant.latitude=45.5
+#     restaurant.longitude=75.56
+
+#     restaurant.save()
+#     print(connection.queries)
+
+# def run():
+#     #restaurant=Restaurant.objects.all()
+#     restaurant=Restaurant.objects.filter(name__startswith='P')
+#     print(restaurant)
+
+#     print(restaurant.update(
+#         data_opened=timezone.now() - timezone.timedelta(days=365),
+#         website="Creation.com"
+
+#     ))
+#     print(connection.queries)
+
+# def run():
+#     restaurant =Restaurant.objects.first()
+#     print(restaurant.pk)
+#     print(restaurant.ratings.all())
+#     print(restaurant.delete())
+#     print(connection.queries)
+
+
+def run():
+    Restaurant.objects.all().delete()
