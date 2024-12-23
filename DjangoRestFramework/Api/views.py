@@ -46,6 +46,18 @@ class UserOrderListAPIView(generics.ListAPIView):
         return qs.filter(user= user)
 
 
+class ProductCreateAPIView(generics.CreateAPIView):
+    model=Product
+    serializer_class = ProductSerializer
+
+    def create(self, request, *args, **kwargs):
+        print(request.data)
+        return super().create(request, *args, **kwargs)
+
+
+class ProductListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
 # @api_view(['GET'])
 # def product_list(request):
