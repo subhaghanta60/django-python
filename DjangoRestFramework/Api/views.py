@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 from django.db.models import Max
 
 from rest_framework import generics
+from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework.permissions import (
     IsAuthenticated,
@@ -16,6 +17,8 @@ from rest_framework.permissions import (
 )
 
 from rest_framework.views import APIView
+
+from Api.filters import ProductFilter
 
 
 class ProductListAPIView(generics.ListAPIView):
@@ -62,6 +65,8 @@ class ProductCreateAPIView(generics.CreateAPIView):
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    # filterset_fields = ('name','price')
+    filterset_class= ProductFilter
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]

@@ -4,7 +4,7 @@ GET http://localhost:8000/products/ HTTP/1.1
 GET http://localhost:8000/product/1/ HTTP/1.1
 
 ###
-PUT http://localhost:8000/product/2/ HTTP/1.1
+PUT http://localhost:8000/product/1/ HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM1MDI4NjYxLCJpYXQiOjE3MzUwMjgzNjEsImp0aSI6IjZmN2U5NDM5MzdkMTQ2YWFiNzI0NTM1NmU5Mzg1YmI0IiwidXNlcl9pZCI6Mn0.d2xkfS2RTogxbVeIdY8EbrZCDcIwlNN7bS1QOd450XQ
 
