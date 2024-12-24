@@ -4,10 +4,26 @@ GET http://localhost:8000/products/ HTTP/1.1
 
 POST http://localhost:8000/products/ HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM1MDI1MDgwLCJpYXQiOjE3MzUwMjQ3ODAsImp0aSI6IjNkYmVmNTkzOGNhMDQ5NWZiNmJmZjA4N2U5N2QwOGQ0IiwidXNlcl9pZCI6Mn0.9TFSZ8Km50g9S1e8SCR4zFnI2BrHCqkKdZdZrC3IhQQ
 
 {
-    "name":"TV",
-    "price":300.00,
-    "stock":14,
-    "description": "An amazing New TV"
+    "name":"TV5",
+    "price":100.00,
+    "stock":15,
+    "description": "An TV"
 }
+
+###
+
+POST http://localhost:8000/api/token/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "pythondev",
+    "password": "python12345"
+}
+
+
+###
+GET http://localhost:8000/user-orders/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM1MDI1NDQ3LCJpYXQiOjE3MzUwMjUxNDcsImp0aSI6IjhmMjRhZDRmYWVjZDQ2ZjY5OWNiODVkZDM3YjcxYzYzIiwidXNlcl9pZCI6Mn0.gkIgSSiqmZxE7o6J2HtT-l7sKvitqqnt0NUhkekLryM
