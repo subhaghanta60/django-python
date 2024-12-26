@@ -25,6 +25,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
 
+from rest_framework import viewsets
+
 
 class ProductListAPIView(generics.ListAPIView):
 
@@ -38,24 +40,29 @@ class ProductDetailAPIView(generics.RetrieveAPIView):
     lookup_url_kwarg = 'product_id'
 
 
-
-class OrderListAPIView(generics.ListAPIView):
-
+class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.prefetch_related('items','items__product').all()
     serializer_class = OrderSerializer
+    permission_classes=[AllowAny]
+
+
+# class OrderListAPIView(generics.ListAPIView):
+
+#     queryset = Order.objects.prefetch_related('items','items__product').all()
+#     serializer_class = OrderSerializer
 
 
 
-class UserOrderListAPIView(generics.ListAPIView):
+# class UserOrderListAPIView(generics.ListAPIView):
 
-    queryset = Order.objects.prefetch_related('items','items__product').all()
-    serializer_class = OrderSerializer
-    permission_classes=[IsAuthenticated]
+#     queryset = Order.objects.prefetch_related('items','items__product').all()
+#     serializer_class = OrderSerializer
+#     permission_classes=[IsAuthenticated]
 
-    def get_queryset(self):
-        user = self.request.user
-        qs= super().get_queryset()
-        return qs.filter(user= user)
+#     def get_queryset(self):
+#         user = self.request.user
+#         qs= super().get_queryset()
+#         return qs.filter(user= user)
 
 
 class ProductCreateAPIView(generics.CreateAPIView):
