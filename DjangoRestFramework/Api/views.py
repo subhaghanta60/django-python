@@ -18,7 +18,7 @@ from rest_framework.permissions import (
 
 from rest_framework.views import APIView
 
-from Api.filters import ProductFilter, InstockFilterBackend
+from Api.filters import ProductFilter, InstockFilterBackend,OrderFilter
 
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
@@ -26,6 +26,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
 
 from rest_framework import viewsets
+
+from rest_framework.decorators import action
 
 
 class ProductListAPIView(generics.ListAPIView):
@@ -44,6 +46,16 @@ class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.prefetch_related('items','items__product').all()
     serializer_class = OrderSerializer
     permission_classes=[AllowAny]
+    pagination_class= None
+    filterset_class = OrderFilter
+    filter_backends = [DjangoFilterBackend]
+
+    @action(detail=False, methods=['get'], url_path='user-orders', permission_classes=[IsAuthenticated])
+    def user_order(self, request):
+        orders = self.get_queryset().filter(user=request.user)
+        serializer = self.get_serializer(orders, many=True)
+        return Response(serializer.data)
+
 
 
 # class OrderListAPIView(generics.ListAPIView):
